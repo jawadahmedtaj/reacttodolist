@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
+import NewTodoForm from "./NewTodoForm";
 
 export default class TodoList extends Component {
   constructor(props) {
@@ -8,6 +9,13 @@ export default class TodoList extends Component {
     this.state = {
       todos: [{ task: "Walk the fish" }, { task: "Groom Chickens" }]
     };
+    this.create = this.create.bind(this);
+  }
+
+  create(newTodo) {
+    this.setState({
+      todos: [...this.state.todos, newTodo]
+    });
   }
 
   render() {
@@ -18,6 +26,7 @@ export default class TodoList extends Component {
     return (
       <div>
         <h1>Todo List!</h1>
+        <NewTodoForm createTodo={this.create} />
         <ul>{todos}</ul>
       </div>
     );
