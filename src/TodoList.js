@@ -7,9 +7,10 @@ export default class TodoList extends Component {
     super(props);
 
     this.state = {
-      todos: [{ task: "Walk the fish" }, { task: "Groom Chickens" }]
+      todos: []
     };
     this.create = this.create.bind(this);
+    this.remove = this.remove.bind(this);
   }
 
   create(newTodo) {
@@ -18,9 +19,22 @@ export default class TodoList extends Component {
     });
   }
 
+  remove(id) {
+    this.setState({
+      todos: this.state.todos.filter(task => task.id !== id)
+    });
+  }
+
   render() {
     let todos = this.state.todos.map(todo => {
-      return <Todo task={todo.task} />;
+      return (
+        <Todo
+          key={todo.id}
+          id={todo.id}
+          task={todo.task}
+          removeTodo={this.remove}
+        />
+      );
     });
 
     return (
