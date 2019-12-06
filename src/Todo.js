@@ -15,6 +15,13 @@ class Todo extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Todo comp did update");
+    console.log(prevProps.task);
+    console.log(this.props.task);
+  }
+
   handleRemove() {
     this.props.removeTodo(this.props.id);
   }
@@ -39,12 +46,12 @@ class Todo extends Component {
     let result;
     if (this.state.isEditing) {
       result = (
-        <CSSTransition key='editing' timeout={500} classNames='form'>
-          <form className='Todo-edit-form' onSubmit={this.handleUpdate}>
+        <CSSTransition key="editing" timeout={500} classNames="form">
+          <form className="Todo-edit-form" onSubmit={this.handleUpdate}>
             <input
-              type='text'
+              type="text"
               value={this.state.task}
-              name='task'
+              name="task"
               onChange={this.handleChange}
             />
             <button>Save</button>
@@ -53,8 +60,8 @@ class Todo extends Component {
       );
     } else {
       result = (
-        <CSSTransition key='normal' timeout={500} classNames='task-text'>
-          <li className='Todo-task' onClick={this.handleToggle}>
+        <CSSTransition key="normal" timeout={500} classNames="task-text">
+          <li className="Todo-task" onClick={this.handleToggle}>
             {this.props.task}
           </li>
         </CSSTransition>
@@ -65,12 +72,12 @@ class Todo extends Component {
         className={this.props.completed ? "Todo completed" : "Todo"}
       >
         {result}
-        <div className='Todo-buttons'>
+        <div className="Todo-buttons">
           <button onClick={this.toggleForm}>
-            <i class='fas fa-pen' />
+            <i class="fas fa-pen" />
           </button>
           <button onClick={this.handleRemove}>
-            <i class='fas fa-trash' />
+            <i class="fas fa-trash" />
           </button>
         </div>
       </TransitionGroup>

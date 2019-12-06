@@ -34,6 +34,13 @@ class TodoList extends Component {
     });
     this.setState({ todos: updatedTodos });
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Comp did update");
+    console.log(prevState.todos);
+    console.log(this.state.todos);
+  }
+
   toggleCompletion(id) {
     const updatedTodos = this.state.todos.map(todo => {
       if (todo.id === id) {
