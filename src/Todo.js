@@ -22,6 +22,10 @@ class Todo extends Component {
     console.log(this.props.task);
   }
 
+  componentWillUnmount() {
+    console.log("Comp will unmount");
+  }
+
   handleRemove() {
     this.props.removeTodo(this.props.id);
   }
